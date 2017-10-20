@@ -6,6 +6,10 @@ import requests
 import time
 import random
 
+'''
+This code will not run without your valid Osu! API key
+'''
+
 async def get_user(api, user_id):
 	results = await api.get_user(user_id)
 	return results
@@ -61,8 +65,10 @@ user_recent = db['user_recent']
 
 #if __name__ == '__main__':
 
+apikey = # your Osu! API key
+
 user_ids = random.sample(range(1, 5000000), 500000)
-api = OsuApi("4f01671000fb773e9c988d46ec7ffec3def52719", connector=AHConnector())
+api = OsuApi(apikey, connector=AHConnector())
 collected = 0
 i = 0
 requests = 0
