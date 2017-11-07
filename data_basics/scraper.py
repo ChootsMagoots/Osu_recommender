@@ -63,92 +63,92 @@ user_recent = db['user_recent']
 # coll.find_one()
 # coll.find().count()
 
-#if __name__ == '__main__':
+if __name__ == '__main__':
 
-apikey = # your Osu! API key
+	apikey = # your Osu! API key
 
-user_ids = random.sample(range(1, 5000000), 500000)
-api = OsuApi(apikey, connector=AHConnector())
-collected = 0
-i = 0
-requests = 0
-while requests < 550000:
-	user_id = user_ids[i]
-	try:
-		results = asyncio.get_event_loop().run_until_complete(get_user_recent(api, user_id))
-		requests += 1
-		time.sleep(0.25)
-		if results != []:
-			for result in results:
-				user_recent.save(parse_user_recent(result, user_id))
-			collected = collected + 1
-		'''
-		else: 
-			user.remove({'user_id': str(user_id)})
-			user_best.remove({'user_id': str(user_id)})
-			user_recent.remove({'user_id': str(user_id)})
-			break
-		'''
-	except aiohttp.client_exceptions.ClientPayloadError:
-		print('get_user_recent(): ' + str(user_id) + ' not successful.')
-	try:
-		results = asyncio.get_event_loop().run_until_complete(get_user(api, user_id))
-		requests += 1
-		time.sleep(0.25)
-		if results != []:
-			user.save(parse_user(results[0]))
-			collected += 1
-		'''
-		else: 
-			user.remove({'user_id': str(user_id)})
-			user_best.remove({'user_id': str(user_id)})
-			user_recent.remove({'user_id': str(user_id)})
-			break
-		'''
-	except aiohttp.client_exceptions.ClientPayloadError:
-		print('get_user():' + str(user_id) + ' not successful.')
-	try: 
-		results = asyncio.get_event_loop().run_until_complete(get_user_best(api, user_id))
-		requests += 1
-		time.sleep(0.25)
-		if results != []:
-			for result in results:
-				user_best.save(parse_user_recent(result, user_id))
-			collected += 1
-		'''
-		else: 
-			user.remove({'user_id': str(user_id)})
-			user_best.remove({'user_id': str(user_id)})
-			user_recent.remove({'user_id': str(user_id)})
-			break
-		'''
-	except aiohttp.client_exceptions.ClientPayloadError:
-		print('get_user_best(): ' + str(user_id) + ' not successful.')
-	print('user: ' + str(user_id) + ': completed.')
-	print('Data collected: ', collected)
+	user_ids = random.sample(range(1, 5000000), 500000)
+	api = OsuApi(apikey, connector=AHConnector())
+	collected = 0
+	i = 0
+	requests = 0
+	while requests < 550000:
+		user_id = user_ids[i]
+		try:
+			results = asyncio.get_event_loop().run_until_complete(get_user_recent(api, user_id))
+			requests += 1
+			time.sleep(0.25)
+			if results != []:
+				for result in results:
+					user_recent.save(parse_user_recent(result, user_id))
+				collected = collected + 1
+			'''
+			else: 
+				user.remove({'user_id': str(user_id)})
+				user_best.remove({'user_id': str(user_id)})
+				user_recent.remove({'user_id': str(user_id)})
+				break
+			'''
+		except aiohttp.client_exceptions.ClientPayloadError:
+			print('get_user_recent(): ' + str(user_id) + ' not successful.')
+		try:
+			results = asyncio.get_event_loop().run_until_complete(get_user(api, user_id))
+			requests += 1
+			time.sleep(0.25)
+			if results != []:
+				user.save(parse_user(results[0]))
+				collected += 1
+			'''
+			else: 
+				user.remove({'user_id': str(user_id)})
+				user_best.remove({'user_id': str(user_id)})
+				user_recent.remove({'user_id': str(user_id)})
+				break
+			'''
+		except aiohttp.client_exceptions.ClientPayloadError:
+			print('get_user():' + str(user_id) + ' not successful.')
+		try: 
+			results = asyncio.get_event_loop().run_until_complete(get_user_best(api, user_id))
+			requests += 1
+			time.sleep(0.25)
+			if results != []:
+				for result in results:
+					user_best.save(parse_user_recent(result, user_id))
+				collected += 1
+			'''
+			else: 
+				user.remove({'user_id': str(user_id)})
+				user_best.remove({'user_id': str(user_id)})
+				user_recent.remove({'user_id': str(user_id)})
+				break
+			'''
+		except aiohttp.client_exceptions.ClientPayloadError:
+			print('get_user_best(): ' + str(user_id) + ' not successful.')
+		print('user: ' + str(user_id) + ': completed.')
+		print('Data collected: ', collected)
 
-	i += 1
-api.close()
+		i += 1
+	api.close()
 
 
 
-'''
-	user_id = Attribute(int)
-    username = Attribute(str)
-    count300 = Attribute(Nullable(int))
-    count100 = Attribute(Nullable(int))
-    count50 = Attribute(Nullable(int))
-    playcount = Attribute(Nullable(int))
-    ranked_score = Attribute(Nullable(int))
-    total_score = Attribute(Nullable(int))
-    pp_rank = Attribute(Nullable(int))
-    level = Attribute(Nullable(float))
-    pp_raw = Attribute(Nullable(float))
-    accuracy = Attribute(Nullable(float))
-    count_rank_ss = Attribute(Nullable(int))
-    count_rank_s = Attribute(Nullable(int))
-    count_rank_a = Attribute(Nullable(int))
-    country = Attribute(str)
-    pp_country_rank = Attribute(int)
-    events = Attribute(JsonList(str))
- '''
+	'''
+		user_id = Attribute(int)
+	    username = Attribute(str)
+	    count300 = Attribute(Nullable(int))
+	    count100 = Attribute(Nullable(int))
+	    count50 = Attribute(Nullable(int))
+	    playcount = Attribute(Nullable(int))
+	    ranked_score = Attribute(Nullable(int))
+	    total_score = Attribute(Nullable(int))
+	    pp_rank = Attribute(Nullable(int))
+	    level = Attribute(Nullable(float))
+	    pp_raw = Attribute(Nullable(float))
+	    accuracy = Attribute(Nullable(float))
+	    count_rank_ss = Attribute(Nullable(int))
+	    count_rank_s = Attribute(Nullable(int))
+	    count_rank_a = Attribute(Nullable(int))
+	    country = Attribute(str)
+	    pp_country_rank = Attribute(int)
+	    events = Attribute(JsonList(str))
+	 '''
